@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using System;
-using UnityEditor.Experimental.GraphView;
+using UnityEngine.UIElements;
 
 public enum ButtonType {
 	Left,
@@ -16,25 +16,28 @@ public class ButtonManager : MonoBehaviour
 	InputAction rightButton;
 	bool leftHeld;
 	bool rightHeld;
-	public List<ButtonType> pressedSequence;
+    int leftHeldTicks;
+    int rightHeldTicks;
+	bool casted;
+    public List<ButtonType> pressedSequence;
 	public List<Tuple<ButtonType, int>> pressedQueue;
 	ListButtonsUI listButtonsUI;
-	int leftHeldTicks;
-	int rightHeldTicks;
+    [SerializeField] SpellManager spellManager;
 
     void Awake()
 	{
-		leftButton = InputSystem.actions.FindAction("LeftButton");
+        GameTick.OnTick += Check;
+        GameTick.OnTick += DecreaseQueue;
+        leftButton = InputSystem.actions.FindAction("LeftButton");
 		rightButton = InputSystem.actions.FindAction("RightButton");
 		leftHeld = false;
 		rightHeld = false;
-		pressedSequence = new List<ButtonType>();
+        leftHeldTicks = 0;
+        rightHeldTicks = 0;
+		casted = false;
+        pressedSequence = new List<ButtonType>();
 		pressedQueue = new List<Tuple<ButtonType, int>>();
         listButtonsUI = ListButtonsUI.instance;
-		GameTick.OnTick += Check;
-		GameTick.OnTick += DecreaseQueue;
-		leftHeldTicks = 0;
-        rightHeldTicks = 0;
 
     }
 
@@ -77,10 +80,13 @@ public class ButtonManager : MonoBehaviour
 		{
 			rightHeldTicks++;
         }
-		if(leftPressed && rightPressed && leftHeldTicks <= 2 && rightHeldTicks <= 2) {
+		if(leftPressed && rightPressed && leftHeldTicks <= 3 && rightHeldTicks <= 3 && !casted) {
+			Debug.Log("cast");
+			casted = true;
 			leftHeld = true;
 			rightHeld = true;
-			pressedSequence = new List<ButtonType>();
+            spellManager.Cast(pressedSequence);
+            pressedSequence = new List<ButtonType>();
 			pressedQueue = new List<Tuple<ButtonType, int>>();
             listButtonsUI.DeleteAll();
 		}
@@ -97,10 +103,12 @@ public class ButtonManager : MonoBehaviour
 		if (!leftPressed) {
 			leftHeld = false;
 			leftHeldTicks = 0;
+			casted = false;
         }
         if (!rightPressed) {
             rightHeld = false;
             rightHeldTicks = 0;
+			casted = false;
         }
     }
 }
