@@ -17,17 +17,11 @@ public class ListButtonsUI : MonoBehaviour
 		createdElements = new List<Image>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 	public void DrawLeft() 
 	{
 		Image newImage = Instantiate(LeftIndicator, Target.transform.parent);
 		newImage.transform.position += new Vector3(xOffset, 0, 0);
-		xOffset += LeftIndicator.sprite.rect.width + offsetIncrement;
+		//xOffset += LeftIndicator.transform.width + offsetIncrement;
 		createdElements.Add(newImage);
 	}
 
@@ -35,7 +29,7 @@ public class ListButtonsUI : MonoBehaviour
 	{
 		Image newImage = Instantiate(RightIndicator, Target.transform.parent);
 		newImage.transform.position += new Vector3(xOffset, 0, 0);
-		xOffset += RightIndicator.sprite.rect.width + offsetIncrement;
+		//xOffset += RightIndicator.transform.width + offsetIncrement;
 		createdElements.Add(newImage);
 	}
 

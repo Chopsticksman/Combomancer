@@ -421,7 +421,7 @@ GameObject:
   - component: {fileID: 370430916}
   - component: {fileID: 370430917}
   m_Layer: 5
-  m_Name: ButtonPressTracker
+  m_Name: ListButtonsUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -457,13 +457,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 370430915}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91c67249c9be88dd186d0204b74b84bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b411fc5aa8e7334d8bd6908749fce1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   LeftIndicator: {fileID: 23619933}
   RightIndicator: {fileID: 1110611783}
   Target: {fileID: 953041561}
-  offsetIncrement: 0
+  offsetIncrement: 100
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -822,7 +822,7 @@ GameObject:
   - component: {fileID: 1789716651}
   - component: {fileID: 1789716652}
   m_Layer: 0
-  m_Name: InputManager
+  m_Name: ButtonManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -852,7 +852,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1789716650}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac1478b8beb2701ee94568a5b0f5ae22, type: 3}
+  m_Script: {fileID: 11500000, guid: 642cedaf39def784b8ce1789afcb1cb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pressedSequence: 

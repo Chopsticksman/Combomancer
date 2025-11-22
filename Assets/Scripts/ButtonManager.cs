@@ -36,7 +36,6 @@ public class ButtonManager : MonoBehaviour
 			bool leftPressed = leftButton.IsPressed();
 			bool rightPressed = rightButton.IsPressed();
 			if(leftPressed && rightPressed && !leftHeld && !rightHeld) {
-				Debug.Log("both pressed");
 				leftHeld = true;
 				rightHeld = true;
 				pressedSequence = new List<ButtonType>();
@@ -45,14 +44,12 @@ public class ButtonManager : MonoBehaviour
 			else if (leftPressed && !leftHeld) 
 			{
 				pressedSequence.Add(ButtonType.Left);
-				Debug.Log("leftButton");
 				leftHeld = true;
 				listButtonsUI.DrawLeft();
 			} 
 			else if (rightPressed && !rightHeld) 
 			{
 				pressedSequence.Add(ButtonType.Right);
-				Debug.Log(pressedSequence.ToString());
 				rightHeld = true;
 				listButtonsUI.DrawRight();
 			}
