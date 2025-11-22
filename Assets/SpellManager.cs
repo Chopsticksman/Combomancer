@@ -9,22 +9,22 @@ public class SpellManager : MonoBehaviour
         string spellString = "";
         foreach (ButtonType bt in list) {
             if (bt == ButtonType.Left) {
-                spellString += "L";
+                spellString += "F";
             } else {
-                spellString += "R";
+                spellString += "J";
             }
         }
         switch (spellString) {
-            case "LRL":
+            case "FJF":
                 spellText.text = "Cast Fireball!";
                 break;
-            case "RLR":
+            case "JFJ":
                 spellText.text = "Cast Ice Spike!";
                 break;
-            case "LLR":
+            case "FFJ":
                 spellText.text = "Cast Heal!";
                 break;
-            case "RRL":
+            case "JJF":
                 spellText.text = "Cast Shield!";
                 break;
             default:
