@@ -8,6 +8,7 @@ public class EnemyManager : MonoBehaviour
 	[SerializeField] GameObject startPoint;
 	List<Enemy> allEnemies;
 	bool hasRun = false;
+	int tick = 0;
     void Awake()
     {
 		this.allEnemies = new List<Enemy>();
@@ -17,21 +18,34 @@ public class EnemyManager : MonoBehaviour
 
 		// this should always happen
 		GameTick.OnTick += DeleteDead;
+		GameTick.OnTick += MoveTick;
+		GameTick.OnTick += IncrementEnemyTick;
     }
+
+	void IncrementEnemyTick() 
+	{
+		tick++;
+	}
 
 	void SummonEnemy()
 	{
-		if(!hasRun){
-			Debug.Log("summon!");
-			Enemy newEnemy = Instantiate(enemy, startPoint.transform.position, startPoint.transform.rotation);
-			// newEnemy.transform.position = new Vector3(0,0,0);
-			allEnemies.Add(newEnemy);
+		if(hasRun)
+			return;
+		if (tick <= 100) {
+			return;
 		}
+		Debug.Log("summon!");
+		Enemy newEnemy = Instantiate(enemy, startPoint.transform.position, startPoint.transform.rotation);
+		// newEnemy.transform.position = new Vector3(0,0,0);
+		allEnemies.Add(newEnemy);
 		hasRun = true;
 	}
 	// treat allEnemies list as swapback array
 	void DeleteDead()
 	{
+		if (tick <= 100) {
+			return;
+		}
 		int end = allEnemies.Count;
 		for(int i = 0; i < end;)
 		{
@@ -61,7 +75,7 @@ public class EnemyManager : MonoBehaviour
 		{
 			Debug.Log("moving " + x++);
 			// 1. direction vector
-			Vector3 direction = Vector3.Normalize(e.transform.position - e.destination.transform.position);
+			Vector3 direction = Vector3.Normalize(e.destination.transform.position - e.transform.position);
 			// 2. multiply by speed
 			Vector3 movement = direction * e.speed;
 			// 3. add to position
