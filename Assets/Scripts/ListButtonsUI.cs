@@ -9,36 +9,44 @@ public class ListButtonsUI : MonoBehaviour
 	[SerializeField] Canvas Target;
 	[SerializeField] float offsetIncrement;
 	List<Image> createdElements;
+	public static ListButtonsUI instance;
 	float xOffset;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
 		createdElements = new List<Image>();
+		xOffset = 0;
+		instance = this;
     }
-
+		
 	public void DrawLeft() 
 	{
-		Image newImage = Instantiate(LeftIndicator, Target.transform.parent);
-		newImage.transform.position += new Vector3(xOffset, 0, 0);
-		//xOffset += LeftIndicator.transform.width + offsetIncrement;
+		Rect r = LeftIndicator.GetComponent<RectTransform>().rect;
+        Image newImage = Instantiate(LeftIndicator, Target.transform);
+        newImage.transform.position += new Vector3(xOffset + r.width / 2, -r.height / 2, 0);
+        xOffset += r.width + offsetIncrement;
 		createdElements.Add(newImage);
-	}
+	}       
 
 	public void DrawRight() 
 	{
-		Image newImage = Instantiate(RightIndicator, Target.transform.parent);
-		newImage.transform.position += new Vector3(xOffset, 0, 0);
-		//xOffset += RightIndicator.transform.width + offsetIncrement;
-		createdElements.Add(newImage);
+        Rect r = RightIndicator.GetComponent<RectTransform>().rect;
+        Image newImage = Instantiate(RightIndicator, Target.transform);
+        newImage.transform.position += new Vector3(xOffset + r.width / 2, -r.height / 2, 0);
+        xOffset += r.width + offsetIncrement;
+        createdElements.Add(newImage);
 	}
 
 	public void DeleteAll() 
 	{
 		for(int i = 0; i < createdElements.Count; i++) 
 		{
-			Image e = createdElements[i];
-			Object.Destroy(e);
+            if (createdElements[i] != null)
+            {
+                Destroy(createdElements[i].gameObject);
+            }
 		}
+		xOffset = 0;
 	}
 }
