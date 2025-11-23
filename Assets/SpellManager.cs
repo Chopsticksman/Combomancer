@@ -6,13 +6,13 @@ using UnityEngine;
 public class SpellManager : MonoBehaviour
 {
     [SerializeField] TMP_Text spellText;
-    [SerializeField] GameObject fireballSprite;
+    [SerializeField] SpriteRenderer fireballSprite;
     [SerializeField] int fireballDamage;
-    public List<Tuple<GameObject, int>> activeEffects;
+    public List<Tuple<SpriteRenderer, int>> activeEffects;
 
     private void Awake()
     {
-        activeEffects = new List<Tuple<GameObject, int>>();
+        activeEffects = new List<Tuple<SpriteRenderer, int>>();
         GameTick.OnTick += DecreaseQueue;
     }
     public void Cast(List<ButtonType> list)
@@ -33,8 +33,7 @@ public class SpellManager : MonoBehaviour
         {
             case "FJF":
                 spellText.text = "Cast Fireball!";
-                //CastFireball(EnemyManager.instance.ClosestEnemy());
-                CastFireball(new Vector3(0, 0, 0));
+                CastFireball(EnemyManager.instance.ClosestEnemy());
                 break;
             case "JFJ":
                 spellText.text = "Cast Ice Spike!";
@@ -51,11 +50,11 @@ public class SpellManager : MonoBehaviour
         }
     }
 
-    void CastFireball(Vector3 location)
+    void CastFireball(Enemy e)
     {
-        GameObject fireball = Instantiate(fireballSprite, transform);
-        fireball.transform.position = location;
-        activeEffects.Add(new Tuple<GameObject, int>(fireball, 50));
+        SpriteRenderer fireball = Instantiate(fireballSprite, transform);
+        fireball.transform.position = e.transform.position;
+        activeEffects.Add(new Tuple<SpriteRenderer, int>(fireball, 50));
     }
 
     void DecreaseQueue()
@@ -75,7 +74,7 @@ public class SpellManager : MonoBehaviour
                 }
                 else
                 {
-                    activeEffects[i] = new Tuple<GameObject, int>(activeEffects[i].Item1, activeEffects[i].Item2 - 1);
+                    activeEffects[i] = new Tuple<SpriteRenderer, int>(activeEffects[i].Item1, activeEffects[i].Item2 - 1);
                 }
             }
         }

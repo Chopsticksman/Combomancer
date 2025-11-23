@@ -61,7 +61,7 @@ public class EnemyManager : MonoBehaviour
 			return;
 		}
 		Debug.Log("summon!");
-		int randomIndex = Random.Range(0, waveOptions.Count);
+		int randomIndex = Random.Range(0, waveOptions.Count - 1);
 		Wave randomWave = waveOptions[randomIndex];
 		summonWave(randomWave);
 		hasRun = true;
