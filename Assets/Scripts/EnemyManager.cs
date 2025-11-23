@@ -9,7 +9,6 @@ public class EnemyManager : MonoBehaviour
 	[SerializeField] List<Wave> waveOptions;
 	public GameObject player;
 	List<Enemy> allEnemies;
-	bool hasRun = false;
 	int tick = 0;
 	public static EnemyManager instance;
     void Awake()
@@ -29,10 +28,6 @@ public class EnemyManager : MonoBehaviour
 	void IncrementEnemyTick() 
 	{
 		tick++;
-		if (tick >= 100)
-        {
-            tick = 0;
-		}
 	}
 
 	void summonWave(Wave wave) 
@@ -59,22 +54,22 @@ public class EnemyManager : MonoBehaviour
 
 	void SummonEnemy()
 	{
-		if (tick <= 100) {
+		if (tick <= 300) {
 			return;
 		}
-		Debug.Log("summon!");
 		int randomIndex = Random.Range(0, waveOptions.Count - 1);
 		Wave randomWave = waveOptions[randomIndex];
 		summonWave(randomWave);
-		hasRun = true;
+		tick = 0;
 	}
 	// treat allEnemies list as swapback array
 
-	void DeleteDead()
+	public void DeleteDead()
 	{
-		if (tick <= 100) {
-			return;
-		}
+		if (tick <= 100)
+        {
+            return;
+        }
 		int end = allEnemies.Count;
 		for(int i = 0; i < end;)
 		{

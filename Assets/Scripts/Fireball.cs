@@ -11,7 +11,7 @@ public class Fireball : MonoBehaviour
             hit.hitPoints -= dmg;
             if (hit.hitPoints <= 0)
             {
-                hit.gameObject.SetActive(false);
+                EnemyManager.instance.DeleteDead();
             }
         }
     }

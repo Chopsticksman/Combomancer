@@ -1,12 +1,17 @@
+using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] GameObject game;
+    [SerializeField] TMP_Text deathText;
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (EnemyManager.instance.IsEnemy(collision.gameObject))
         {
-            Debug.Log("Die");
+            deathText.gameObject.SetActive(true);
+            
+            game.gameObject.SetActive(false);
         }
     }
 }

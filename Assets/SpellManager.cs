@@ -45,6 +45,7 @@ public class SpellManager : MonoBehaviour
                 break;
             case "FFFJF":
                 spellText.text = "Cast Power Word: Kill";
+                spellText.color = killSprite.color;
                 CastPWKill(EnemyManager.instance.ClosestEnemy());
                 break;
             case "JJF":
