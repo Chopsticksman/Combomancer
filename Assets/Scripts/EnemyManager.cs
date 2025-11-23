@@ -11,6 +11,7 @@ public class EnemyManager : MonoBehaviour
 	List<Enemy> allEnemies;
 	int tick = 0;
 	public static EnemyManager instance;
+	int summonInterval = 300;
     void Awake()
     {
 		allEnemies = new List<Enemy>();
@@ -20,7 +21,6 @@ public class EnemyManager : MonoBehaviour
 		GameTick.OnTick += SummonEnemy;
 
 		// this should always happen
-		GameTick.OnTick += DeleteDead;
 		GameTick.OnTick += MoveTick;
 		GameTick.OnTick += IncrementEnemyTick;
     }
@@ -54,22 +54,21 @@ public class EnemyManager : MonoBehaviour
 
 	void SummonEnemy()
 	{
-		if (tick <= 300) {
+		if (tick <= summonInterval) {
 			return;
 		}
-		int randomIndex = Random.Range(0, waveOptions.Count - 1);
+		int randomIndex = Random.Range(0, waveOptions.Count);
 		Wave randomWave = waveOptions[randomIndex];
 		summonWave(randomWave);
 		tick = 0;
+		if (summonInterval > 10) {
+			summonInterval -= 5;
+		}
 	}
 	// treat allEnemies list as swapback array
 
 	public void DeleteDead()
 	{
-		if (tick <= 100)
-        {
-            return;
-        }
 		int end = allEnemies.Count;
 		for(int i = 0; i < end;)
 		{
@@ -78,7 +77,7 @@ public class EnemyManager : MonoBehaviour
 			{
 				// 1. put last 
 				Enemy replacement = allEnemies[end-1];
-				Destroy(allEnemies[i]);
+				Destroy(allEnemies[i].gameObject);
 				allEnemies[i] = replacement;
 
 				// 2. delete last and readjust

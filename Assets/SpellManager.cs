@@ -53,6 +53,7 @@ public class SpellManager : MonoBehaviour
                 break;
             default:
                 spellText.text = "No Spell Cast.";
+                spellText.color = Color.black;
                 break;
         }
     }

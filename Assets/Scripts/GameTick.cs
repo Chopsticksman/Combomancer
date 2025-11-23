@@ -9,6 +9,12 @@ public class GameTick : MonoBehaviour
 
     //Whenever update is called enough, 
     public static event Action OnTick;
+    public static GameTick instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     // Update is called once per frame
     private void Update()
@@ -19,5 +25,10 @@ public class GameTick : MonoBehaviour
             timePassed = 0f;
             OnTick?.Invoke();
         }
+    }
+
+    public void stopTick()
+    {
+        tickTime = 10000000f;
     }
 }

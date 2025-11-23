@@ -10,8 +10,7 @@ public class Player : MonoBehaviour
         if (EnemyManager.instance.IsEnemy(collision.gameObject))
         {
             deathText.gameObject.SetActive(true);
-            
-            game.gameObject.SetActive(false);
+            GameTick.instance.stopTick();
         }
     }
 }
