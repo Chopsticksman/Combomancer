@@ -7,8 +7,7 @@ public class Enemy : MonoBehaviour
 	public float hitPoints;
 	public GameObject startPoint;
 	float size;
-
-	void Start() 
+    void Start() 
 	{
 		// HARD CODED NO TIME TO FIGURE OUT SIZE OF BOUNDING BOX
 		size = 1;

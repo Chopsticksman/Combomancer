@@ -80,7 +80,6 @@ public class ButtonManager : MonoBehaviour
 			rightHeldTicks++;
         }
 		if(leftPressed && rightPressed && leftHeldTicks <= 3 && rightHeldTicks <= 3 && !casted) {
-			Debug.Log("cast");
 			casted = true;
 			leftHeld = true;
 			rightHeld = true;

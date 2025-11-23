@@ -1,12 +1,18 @@
 using UnityEngine;
 
-public class Fireball : Spell
+public class Fireball : MonoBehaviour
 {
-    private void Awake()
+    int dmg = 100;
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        dmg = 100;
-    }
-    public override void Play(Vector3 location) {
-        
+        if (EnemyManager.instance.IsEnemy(collision.gameObject))
+        {
+            Enemy hit = EnemyManager.instance.TryGetEnemy(collision.gameObject);
+            hit.hitPoints -= dmg;
+            if (hit.hitPoints <= 0)
+            {
+                hit.gameObject.SetActive(false);
+            }
+        }
     }
 }
