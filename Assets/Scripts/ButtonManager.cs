@@ -65,7 +65,6 @@ public class ButtonManager : MonoBehaviour
 				}
 			}
 		}
-
     }
 
 	void Check()
