@@ -59,6 +59,10 @@ public class SpellManager : MonoBehaviour
 
     void CastFireball(Enemy e)
     {
+        if (e == null)
+        {
+            return;
+        }
         SpriteRenderer fireball = Instantiate(fireballSprite, transform);
         fireball.transform.position = e.transform.position;
         activeEffects.Add(new Tuple<SpriteRenderer, int>(fireball, 50));
@@ -66,12 +70,20 @@ public class SpellManager : MonoBehaviour
 
     void CastGustOfWind(Enemy e)
     {
+        if (e == null)
+        {
+            return;
+        }
         SpriteRenderer wind = Instantiate(windSprite, transform);
         wind.transform.position = e.transform.position;
         activeEffects.Add(new Tuple<SpriteRenderer, int>(wind, 50));
     }
     void CastPWKill(Enemy e)
     {
+        if (e == null)
+        {
+            return;
+        }
         SpriteRenderer kill = Instantiate(killSprite, transform);
         kill.transform.position = e.transform.position;
         activeEffects.Add(new Tuple<SpriteRenderer, int>(kill, 50));
