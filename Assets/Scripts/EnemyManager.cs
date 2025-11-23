@@ -6,6 +6,7 @@ public class EnemyManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 	// [SerializeField] public List<Tuple<Enemy, GameObject, GameObject>> enemyTypes;
 	[SerializeField] List<Enemy> enemyTypes;
+	[SerializeField] List<Wave> waveOptions;
 	public GameObject player;
 	List<Enemy> allEnemies;
 	bool hasRun = false;
@@ -30,6 +31,28 @@ public class EnemyManager : MonoBehaviour
 		tick++;
 	}
 
+	void summonWave(Wave wave) 
+	{
+		// foreach((Enemy, int) ePair in wave.data) 
+		for(int i = 0; i < wave.enemyIndices.Count; i++)
+		{
+			Enemy e = enemyTypes[wave.enemyIndices[i]];
+			int count = wave.enemyCounts[i];
+			Vector3 positionOffset = new Vector3(0,0,0);
+			float enemySize = e.Size();
+			for(int j = 0; j < count; j++) 
+			{
+				GameObject startPoint = e.startPoint;
+				Enemy newEnemy = Instantiate(e,
+						startPoint.transform.position,
+						startPoint.transform.rotation);
+				newEnemy.transform.position -= positionOffset;
+				positionOffset.x -= enemySize;
+				allEnemies.Add(newEnemy);
+			}
+		}
+	}
+
 	void SummonEnemy()
 	{
 		if(hasRun)
@@ -38,9 +61,9 @@ public class EnemyManager : MonoBehaviour
 			return;
 		}
 		Debug.Log("summon!");
-		GameObject startPoint = enemyTypes[0].startPoint;
-		Enemy newEnemy = Instantiate(enemyTypes[0], startPoint.transform.position, startPoint.transform.rotation);
-		allEnemies.Add(newEnemy);
+		int randomIndex = Random.Range(0, waveOptions.Count);
+		Wave randomWave = waveOptions[randomIndex];
+		summonWave(randomWave);
 		hasRun = true;
 	}
 	// treat allEnemies list as swapback array
@@ -96,4 +119,18 @@ public class EnemyManager : MonoBehaviour
         }
         return false;
     }
+	public Enemy ClosestEnemy()
+	{
+		if(allEnemies.Count < 1) 
+			return null;
+		Enemy e = allEnemies[0];
+		for(int i = 1; i < allEnemies.Count; i++)
+		{
+			if (allEnemies[i].transform.position.x < e.transform.position.x)
+			{
+				e = allEnemies[i];
+			}
+		}
+		return e;
+	}
 }
