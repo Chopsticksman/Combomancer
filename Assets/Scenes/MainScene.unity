@@ -1536,6 +1536,7 @@ MonoBehaviour:
   fireballSprite: {fileID: 1057055890729327404, guid: eec090754ec8d4ed9bb6f24f7b7e6314, type: 3}
   windSprite: {fileID: 1710665455947385516, guid: ab46c8b8c6953437f9146da76ef00fdc, type: 3}
   killSprite: {fileID: 3792717974375852050, guid: a729c76a53bdc46649d2183e0f88999e, type: 3}
+  arrowSprite: {fileID: 5026091425200791423, guid: 956c87c43d0f1472fa64bf7845756df9, type: 3}
 --- !u!1 &1879824306
 GameObject:
   m_ObjectHideFlags: 0
@@ -1570,8 +1571,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 485, y: 268}
-  m_SizeDelta: {x: 500, y: 50}
+  m_AnchoredPosition: {x: 635, y: 499}
+  m_SizeDelta: {x: 700, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1879824308
 MonoBehaviour:
@@ -1593,7 +1594,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 'FJFJ >>>>>>>>>>>> Fireball
+
+    JFJJFJ >>>>>>>>>>Gust of Wind
+
+    FJJJ:
+    >>>>>>>>>>> Power Word: Kill
+
+    FFJJ: >>>>>>>>>>>>Magic Arrow'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fed51b5629be742c9b438c08c8931f81, type: 2}
   m_sharedMaterial: {fileID: 3948980534108105982, guid: fed51b5629be742c9b438c08c8931f81, type: 2}
@@ -1602,8 +1610,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4282729983
+  m_fontColor: {r: 1, g: 0.2688679, b: 0.2688679, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1842,7 +1850,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -703, y: 299}
+  m_AnchoredPosition: {x: -650, y: 299}
   m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2048690610

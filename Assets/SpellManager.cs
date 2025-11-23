@@ -9,6 +9,7 @@ public class SpellManager : MonoBehaviour
     [SerializeField] SpriteRenderer fireballSprite;
     [SerializeField] SpriteRenderer windSprite;
     [SerializeField] SpriteRenderer killSprite;
+    [SerializeField] SpriteRenderer arrowSprite;
     public List<Tuple<SpriteRenderer, int>> activeEffects;
 
     private void Awake()
@@ -32,27 +33,29 @@ public class SpellManager : MonoBehaviour
         }
         switch (spellString)
         {
-            case "FJFF":
+            case "FJFJ":
                 spellText.text = "Fireball";
                 spellText.color = fireballSprite.color;
                 CastFireball(EnemyManager.instance.ClosestEnemy());
                 break;
-            case "JFJ":
+            case "JFJJFJ":
                 spellText.text = "Gust of Wind";
                 spellText.color = windSprite.color;
                 spellText.alpha = 1;
                 CastGustOfWind(EnemyManager.instance.ClosestEnemy());
                 break;
-            case "FFFJF":
-                spellText.text = "Cast Power Word: Kill";
+            case "FJJJ":
+                spellText.text = "Power Word: Kill";
                 spellText.color = killSprite.color;
                 CastPWKill(EnemyManager.instance.ClosestEnemy());
                 break;
-            case "JJF":
-                spellText.text = "Cast Shield!";
+            case "FFJJ":
+                spellText.text = "Magic Arrow";
+                spellText.color = arrowSprite.color;
+                CastMagicArrow(EnemyManager.instance.ClosestEnemy());
                 break;
             default:
-                spellText.text = "No Spell Cast.";
+                spellText.text = "No Spell Cast";
                 spellText.color = Color.black;
                 break;
         }
@@ -87,9 +90,19 @@ public class SpellManager : MonoBehaviour
         }
         SpriteRenderer kill = Instantiate(killSprite, transform);
         kill.transform.position = e.transform.position;
-        activeEffects.Add(new Tuple<SpriteRenderer, int>(kill, 50));
+        activeEffects.Add(new Tuple<SpriteRenderer, int>(kill, 5));
     }
 
+    void CastMagicArrow(Enemy e)
+    {
+        if (e == null)
+        {
+            return;
+        }
+        SpriteRenderer arrow = Instantiate(arrowSprite, transform);
+        arrow.transform.position = e.transform.position;
+        activeEffects.Add(new Tuple<SpriteRenderer, int>(arrow, 30));
+    }
     void DecreaseQueue()
     {
         if (activeEffects.Count == 0)
