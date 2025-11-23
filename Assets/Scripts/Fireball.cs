@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Fireball : MonoBehaviour
 {
-    int dmg = 100;
+    public int dmg = 100;
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (EnemyManager.instance.IsEnemy(collision.gameObject))

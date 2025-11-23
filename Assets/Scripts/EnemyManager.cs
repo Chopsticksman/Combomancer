@@ -29,6 +29,10 @@ public class EnemyManager : MonoBehaviour
 	void IncrementEnemyTick() 
 	{
 		tick++;
+		if (tick >= 100)
+        {
+            tick = 0;
+		}
 	}
 
 	void summonWave(Wave wave) 
@@ -55,8 +59,6 @@ public class EnemyManager : MonoBehaviour
 
 	void SummonEnemy()
 	{
-		if(hasRun)
-			return;
 		if (tick <= 100) {
 			return;
 		}

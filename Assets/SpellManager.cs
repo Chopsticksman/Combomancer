@@ -7,7 +7,8 @@ public class SpellManager : MonoBehaviour
 {
     [SerializeField] TMP_Text spellText;
     [SerializeField] SpriteRenderer fireballSprite;
-    [SerializeField] int fireballDamage;
+    [SerializeField] SpriteRenderer windSprite;
+    [SerializeField] SpriteRenderer killSprite;
     public List<Tuple<SpriteRenderer, int>> activeEffects;
 
     private void Awake()
@@ -31,15 +32,20 @@ public class SpellManager : MonoBehaviour
         }
         switch (spellString)
         {
-            case "FJF":
-                spellText.text = "Cast Fireball!";
+            case "FJFF":
+                spellText.text = "Fireball";
+                spellText.color = fireballSprite.color;
                 CastFireball(EnemyManager.instance.ClosestEnemy());
                 break;
             case "JFJ":
-                spellText.text = "Cast Ice Spike!";
+                spellText.text = "Gust of Wind";
+                spellText.color = windSprite.color;
+                spellText.alpha = 1;
+                CastGustOfWind(EnemyManager.instance.ClosestEnemy());
                 break;
-            case "FFJ":
-                spellText.text = "Cast Heal!";
+            case "FFFJF":
+                spellText.text = "Cast Power Word: Kill";
+                CastPWKill(EnemyManager.instance.ClosestEnemy());
                 break;
             case "JJF":
                 spellText.text = "Cast Shield!";
@@ -55,6 +61,19 @@ public class SpellManager : MonoBehaviour
         SpriteRenderer fireball = Instantiate(fireballSprite, transform);
         fireball.transform.position = e.transform.position;
         activeEffects.Add(new Tuple<SpriteRenderer, int>(fireball, 50));
+    }
+
+    void CastGustOfWind(Enemy e)
+    {
+        SpriteRenderer wind = Instantiate(windSprite, transform);
+        wind.transform.position = e.transform.position;
+        activeEffects.Add(new Tuple<SpriteRenderer, int>(wind, 50));
+    }
+    void CastPWKill(Enemy e)
+    {
+        SpriteRenderer kill = Instantiate(killSprite, transform);
+        kill.transform.position = e.transform.position;
+        activeEffects.Add(new Tuple<SpriteRenderer, int>(kill, 50));
     }
 
     void DecreaseQueue()
@@ -74,6 +93,10 @@ public class SpellManager : MonoBehaviour
                 }
                 else
                 {
+                    // if (activeEffects[i].Item1.Equals(fireballSprite))
+                    // {
+                        
+                    // }
                     activeEffects[i] = new Tuple<SpriteRenderer, int>(activeEffects[i].Item1, activeEffects[i].Item2 - 1);
                 }
             }
