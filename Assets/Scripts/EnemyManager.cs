@@ -108,6 +108,18 @@ public class EnemyManager : MonoBehaviour
 		}
 	}
 
+    public Enemy TryGetEnemy(GameObject obj) 
+    {
+        foreach (Enemy e in allEnemies) 
+        {
+            if (e.gameObject.Equals(obj)) 
+            {
+                return e;
+            }
+        }
+        return null;
+    }
+
     public bool IsEnemy(GameObject obj) 
     {
         foreach (Enemy e in allEnemies) 
